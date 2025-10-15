@@ -1,0 +1,11 @@
+# Sanity
+studio/node_modules
+studio/dist
+studio/.sanity/
+studio/sanity.env.js
+
+# Next.js
+web/node_modules
+web/.next
+web/out
+web/.DS_Store
