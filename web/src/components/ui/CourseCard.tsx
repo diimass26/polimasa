@@ -1,5 +1,5 @@
 import SubjectTag from './SubjectTag';
-import Image from 'next/image'; // <-- 1. Impor komponen Image
+import Image from 'next/image';
 
 interface CourseCardProps {
   subject: 'matematika' | 'sains';

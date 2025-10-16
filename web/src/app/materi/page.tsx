@@ -1,7 +1,7 @@
 import { createClient } from '@sanity/client';
-import CourseCard from '@/components/CourseCard'; // Pastikan path ini benar
+import MateriList from '@/components/sections/materi/MateriList'; // Mengimpor komponen client
 
-// Tipe data yang kita harapkan dari Sanity, sekarang dengan deskripsi
+// Tipe data dari Sanity
 type Materi = {
   _id: string;
   judul: string;
@@ -11,9 +11,9 @@ type Materi = {
   deskripsiSingkat: string; 
 };
 
-// Konfigurasi koneksi ke Sanity (sama seperti sebelumnya)
+// Konfigurasi koneksi ke Sanity
 const sanityClient = createClient({
-  projectId: 'du4ey14y', // Ganti dengan Project ID Anda
+  projectId: 'du4ey14y',
   dataset: 'production',
   useCdn: true,
   apiVersion: '2023-05-03',
@@ -21,14 +21,12 @@ const sanityClient = createClient({
 
 // Fungsi untuk mengambil SEMUA data materi
 async function getAllMateri() {
-  // Kueri GROQ untuk mengambil semua field yang kita butuhkan
   const query = `*[_type == "materi"]{
     _id,
     judul,
     slug,
     tagPelajaran,
     tagKelas,
-    // Mengubah deskripsi (rich text) menjadi teks biasa (plain text)
     "deskripsiSingkat": pt::text(deskripsiMateri) 
   }`;
   
@@ -36,34 +34,24 @@ async function getAllMateri() {
   return materiItems;
 }
 
-// Komponen Halaman Daftar Materi
+// Komponen Halaman Daftar Materi (Server Component)
 export default async function MateriPage() {
   const allMateri = await getAllMateri();
 
   return (
-    <main className="container mx-auto p-8">
-      <h1 className="text-4xl font-bold text-steel-blue mb-8">
-        Semua Materi Pembelajaran
-      </h1>
-      
-      {/* Grid untuk menampilkan kartu-kartu */}
-      {/* Tambahkan 'justify-items-center' untuk memusatkan kartu */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-        {/* Loop (map) melalui setiap data materi */}
-        {allMateri.map((materi) => (
-          // Untuk setiap materi, render satu komponen CourseCard
-          // dan oper data dari Sanity ke props yang sesuai
-          <CourseCard
-            key={materi._id}
-            title={materi.judul}
-            subject={materi.tagPelajaran}
-            grade={materi.tagKelas}
-            description={materi.deskripsiSingkat || 'Tidak ada deskripsi.'}
-            link={`/materi/${materi.slug.current}`}
-          />
-        ))}
+    <main className="container mx-auto px-6 py-12 md:px-8">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-[#0F4C75]">
+          Koleksi Materi Pembelajaran
+        </h1>
+        <p className="text-lg text-gray-600 mt-2">
+          Temukan semua yang kamu butuhkan untuk menguasai Matematika dan Sains. 
+Gunakan pencarian dan filter untuk menemukan topik spesifik.
+        </p>
       </div>
+      
+      {/* Meneruskan data ke komponen client */}
+      <MateriList allMateri={allMateri} />
     </main>
   );
 }
-
