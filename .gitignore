@@ -1,11 +1,24 @@
-# Sanity
-studio/node_modules
-studio/dist
-studio/.sanity/
-studio/sanity.env.js
+# Mengabaikan semua folder node_modules di mana pun lokasinya
+**/node_modules
 
-# Next.js
-web/node_modules
-web/.next
-web/out
-web/.DS_Store
+# Mengabaikan file environment
+.env
+.env.local
+*.env.local
+
+# Spesifik untuk Next.js (di dalam folder 'web')
+web/.next/
+web/out/
+
+# Spesifik untuk Sanity (di dalam folder 'studio')
+studio/dist/
+studio/.sanity/
+
+# Mengabaikan file log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Lain-lain
+.DS_Store
+
