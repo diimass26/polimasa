@@ -1,7 +1,8 @@
 "use client"; // Menandai ini sebagai Client Component karena butuh interaktivitas
 
 import React, { useState, useMemo } from "react";
-import CourseCard from '@/components/ui/CourseCard'; // Mengimpor komponen CourseCard dari file terpisah
+import { useSearchParams } from 'next/navigation';
+import CourseCard from '@/components/ui/CourseCard';
 
 // Tipe data yang diterima dari Server Component
 type Materi = {
@@ -19,8 +20,19 @@ interface MateriListProps {
 
 // Komponen utama untuk menampilkan filter dan hasil yang difilter
 export default function MateriList({ allMateri }: MateriListProps) {
+  const searchParams = useSearchParams();
+  const subjectFromUrl = searchParams.get('pelajaran');
+
+  // DIKEMBALIKAN: Logika untuk membaca parameter URL dan mengatur state awal
+  const getInitialSubject = () => {
+    if (subjectFromUrl === 'matematika' || subjectFromUrl === 'sains') {
+      return subjectFromUrl;
+    }
+    return 'all';
+  };
+
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedSubject, setSelectedSubject] = useState<string>('all');
+  const [selectedSubject, setSelectedSubject] = useState<string>(getInitialSubject);
   const [selectedGrades, setSelectedGrades] = useState<string[]>([]);
   const [sortOrder, setSortOrder] = useState<string>('judul-asc');
 
@@ -71,7 +83,6 @@ export default function MateriList({ allMateri }: MateriListProps) {
 
   return (
     <div>
-      {/* Search Bar dengan desain baru */}
       <div className="mb-8 flex justify-center">
         <div className="relative flex items-center w-full max-w-lg">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -86,7 +97,7 @@ export default function MateriList({ allMateri }: MateriListProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Cari materi, contoh: Aljabar"
-            className="block w-full pl-12 pr-4 py-3 border-none bg-slate-100 rounded-full text-base placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F4C75]"
+            className="block w-full pl-12 pr-4 py-3 border-none bg-slate-100 rounded-full text-base placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
       </div>
@@ -120,7 +131,7 @@ export default function MateriList({ allMateri }: MateriListProps) {
                   value={filter.value}
                   checked={selectedGrades.includes(filter.value)}
                   onChange={() => handleGradeChange(filter.value)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#0F4C75] focus:ring-[#0F4C75]"
+                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 />
                 <span className="text-gray-700">{filter.label}</span>
               </label>
@@ -139,7 +150,7 @@ export default function MateriList({ allMateri }: MateriListProps) {
             id="sort-order"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
-            className="block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#0F4C75] focus:border-[#0F4C75] sm:text-sm rounded-md"
+            className="block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="judul-asc">Judul (A-Z)</option>
             <option value="judul-desc">Judul (Z-A)</option>
@@ -168,4 +179,3 @@ export default function MateriList({ allMateri }: MateriListProps) {
     </div>
   );
 }
-

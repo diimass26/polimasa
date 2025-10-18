@@ -35,7 +35,7 @@ export default function HeroSection() {
           
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto">
             {/* DIUBAH: Komponen <Link> diubah menjadi tag <a> standar */}
-            <a href="/matematika" className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#0F4C75] hover:bg-[#85B5D1] transition-colors">
+            <a href="/materi?pelajaran=matematika" className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#0F4C75] hover:bg-[#85B5D1] transition-colors">
                 {/* SVG Anda untuk Matematika */}
                 <span 
                   className="text-white hover:text-[#393E46] font-semibold"
@@ -48,7 +48,7 @@ export default function HeroSection() {
                 </span>
             </a>
             
-            <a href="/sains" className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#36B3B5] hover:bg-[#A3D5D0] transition-colors">
+            <a href="/materi?pelajaran=sains" className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#36B3B5] hover:bg-[#A3D5D0] transition-colors">
                 {/* SVG Anda untuk Sains */}
                 <span 
                   className="text-white hover:text-[#393E46] font-semibold"
