@@ -16,10 +16,10 @@ export const Misi: React.FC = () => {
       <div className="max-w-2xl text-left">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Misi Kami</h2>
         <p className="text-base md:text-lg leading-relaxed mb-4">
-          RumahMatsains lahir dari semangat Program Kreativitas Mahasiswa (PKM)
-          Universitas Maritim Raja Ali Haji. Misi utama kami adalah untuk
-          menjembatani kesenjangan sumber belajar digital yang berkualitas,
-          khususnya bagi siswa SMPN 6 Tanjungpinang.
+          Polimasa (Pojok Literasi Matematika dan Sains) lahir dari semangat 
+          Program Kreativitas Mahasiswa (PKM) Universitas Maritim Raja Ali Haji. 
+          Misi utama kami adalah untuk menjembatani kesenjangan sumber 
+          belajar digital yang berkualitas, khususnya bagi siswa SMPN 6 Tanjungpinang.
         </p>
         <ul className="list-disc pl-5 space-y-3 text-base md:text-lg leading-relaxed">
           <li>
