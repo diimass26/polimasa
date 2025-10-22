@@ -10,19 +10,24 @@ export default function HeroSection() {
         <div className="flex flex-col justify-center items-start flex-1 max-w-full lg:max-w-[50%] z-10 text-white">
           <div className="w-full max-w-[430px]">
             <h1 
-              className="font-bold leading-[100%] tracking-[-0.05em] mb-4 lg:mb-6"
+              className="font-bold leading-[100%] tracking-[-0.05em] mb-4 lg:mb-6 text-[#0F4C75]"
               style={{
                 fontFamily: 'Poppins, sans-serif',
                 fontSize: 'clamp(32px, 5vw, 48px)',
+                whiteSpace: 'pre-line',
               }}
             >
-              Selamat Datang di Pojok Literasi Digital Matematika dan Sains
+              Selamat Datang di <br />
+              Pojok Literasi Digital <br />
+              <span style={{ whiteSpace: 'nowrap' }}>
+                  Matematika dan Sains
+              </span>
             </h1>
           </div>
           
           <div className="pb-6 lg:pb-8">
             <p 
-              className="leading-[100%] tracking-[-0.05em]"
+              className="leading-[100%] tracking-[-0.05em] text-[#0F4C75]"
               style={{
                 fontFamily: 'Poppins, sans-serif',
                 fontSize: 'clamp(20px, 3vw, 30px)',
@@ -68,7 +73,7 @@ export default function HeroSection() {
           {/* Ganti 'main-image.png' dengan nama file gambar utama Anda */}
           <img 
             src="/hero/illustration.png" 
-            alt="Siswa sedang belajar bersama" 
+            alt="Book Illustration" 
             className="w-full max-w-[400px] lg:max-w-[470px] h-auto"
           />
         </div>
