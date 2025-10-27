@@ -4,24 +4,26 @@ import { getMateriDetail, getAllMateriSlugs } from '@/lib/sanity';
 import Header from '@/components/sections/materi/[slug]/Header';
 import MateriContent from '@/components/sections/materi/[slug]/MateriContent';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const materi = await getMateriDetail(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const materi = await getMateriDetail(resolvedParams.slug);
   if (!materi) return { title: 'Materi Tidak Ditemukan' };
   return { title: `${materi.judul} | Polimasa`, description: `Pelajari lebih lanjut tentang ${materi.judul}.` };
 }
 
 export async function generateStaticParams() {
-  const slugs = await getAllMateriSlugs(); // Menggunakan fungsi dari sanity.ts
+  const slugs = await getAllMateriSlugs();
   return slugs.map(item => ({ slug: item.slug }));
 }
 
-// Komponen Halaman Utama
-export default async function MateriDetailPage({ params }: { params: { slug: string } }) {
-  const materi = await getMateriDetail(params.slug);
+export default async function MateriDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  console.log('🧩 Page params:', resolvedParams);
+  console.log('🧩 Page slug:', resolvedParams.slug);
 
-  if (!materi) {
-    notFound();
-  }
+  const materi = await getMateriDetail(resolvedParams.slug);
+
+  if (!materi) notFound();
 
   return (
     <main className="min-h-screen bg-white">

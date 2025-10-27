@@ -1,13 +1,13 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}', // cukup satu baris ini, sudah mencakup semua
   ],
   theme: {
     extend: {},
   },
-  // Tambahkan baris ini
-  plugins: [require('@tailwindcss/typography')],
+  plugins: {
+    typography: {}, // cara baru di Tailwind 4
+  },
 };
