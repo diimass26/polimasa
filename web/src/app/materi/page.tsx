@@ -3,6 +3,8 @@ import MateriList from '@/components/sections/materi/MateriList';
 import { getAllMateri } from '@/lib/sanity';
 import { Suspense } from 'react';
 
+export const revalidate = 30; // update setiap 30 detik
+
 export default async function MateriPage() {
   const allMateri = await getAllMateri();
 
